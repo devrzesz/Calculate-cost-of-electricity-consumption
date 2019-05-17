@@ -12,7 +12,7 @@ namespace Cost_of_electricity_consumption
         private decimal constDistributCost;
         private decimal depedenceTarrifCost;
 
-        public decimal totalCost { get { return constDistributCost + depedenceTarrifCost} }
+        public decimal totalCost { get { return constDistributCost + depedenceTarrifCost; } }
 
 
     }

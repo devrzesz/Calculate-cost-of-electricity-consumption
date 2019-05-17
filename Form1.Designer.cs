@@ -110,6 +110,7 @@
             this.HeatDemand.TabIndex = 9;
             this.HeatDemand.Text = "Oblicz zapotrzebowanie na energie";
             this.HeatDemand.UseVisualStyleBackColor = true;
+            this.HeatDemand.Visible = false;
             this.HeatDemand.Click += new System.EventHandler(this.HeatDemand_Click);
             // 
             // areaHome
@@ -182,6 +183,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.calculateEnergyConsumption_Button);
+            this.MinimumSize = new System.Drawing.Size(688, 343);
             this.Name = "Form1";
             this.Text = "Koszty zuzycia energii na potrzeby ogrzewania elektrycznego";
             ((System.ComponentModel.ISupportInitialize)(this.areaHome)).EndInit();

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cost_of_electricity_consumption
+﻿namespace Cost_of_electricity_consumption
 {
     class Building
     {
-        public Building(string typeOfBuilding,string name, int min, int max)
+        public Building(string typeOfBuilding, string name, int min, int max)
         {
             this.typeOfBuildings = typeOfBuilding;
             Name = name;

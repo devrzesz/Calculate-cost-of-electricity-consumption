@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cost_of_electricity_consumption
@@ -22,12 +15,14 @@ namespace Cost_of_electricity_consumption
         public Form1()
         {
             InitializeComponent();
-
             CreateBuldings();
+            AddItemsToBuildingTypeListBox();
+        }
 
+        private void AddItemsToBuildingTypeListBox()
+        {
             buildingType.Items.Add(TypeOfBuilding.oneFamillyBuilding);
             buildingType.Items.Add(TypeOfBuilding.multiFamillyBuilding);
-
         }
 
         private void CreateBuldings()
@@ -39,9 +34,9 @@ namespace Cost_of_electricity_consumption
             oneFamilyBuildings[3] = new Building(TypeOfBuilding.oneFamillyBuilding, "Energooszczedne", 50, 70);
 
             multiFamilyBuildings = new Building[3];
-            multiFamilyBuildings[0] = new Building(TypeOfBuilding.multiFamillyBuilding,"Stare", 100, 130);
-            multiFamilyBuildings[1] = new Building(TypeOfBuilding.multiFamillyBuilding, "Docieplone",50,80);
-            multiFamilyBuildings[2] = new Building(TypeOfBuilding.multiFamillyBuilding, "Energooszczedne",30,50);
+            multiFamilyBuildings[0] = new Building(TypeOfBuilding.multiFamillyBuilding, "Stare", 100, 130);
+            multiFamilyBuildings[1] = new Building(TypeOfBuilding.multiFamillyBuilding, "Docieplone", 50, 80);
+            multiFamilyBuildings[2] = new Building(TypeOfBuilding.multiFamillyBuilding, "Energooszczedne", 30, 50);
 
         }
 
@@ -52,15 +47,21 @@ namespace Cost_of_electricity_consumption
 
         private void BuildingType2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            HeatDemand.Visible = true;
+
+            heatDemand[0] = currentBuilding[buildingType2.SelectedIndex].minValue * areaHome.Value;
+            heatDemand[1] = currentBuilding[buildingType2.SelectedIndex].maxValue * areaHome.Value;
 
         }
 
         private void BuildingType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            HeatDemand.Visible = false;
             buildingType2.Visible = true;
+            heatDeamndLabelResult.Text = null;
             buildingType2.Items.Clear();
 
-            if (buildingType.SelectedText == TypeOfBuilding.oneFamillyBuilding)
+            if (buildingType.Text == TypeOfBuilding.oneFamillyBuilding)
             {
                 currentBuilding = oneFamilyBuildings;
 
@@ -68,9 +69,9 @@ namespace Cost_of_electricity_consumption
                 {
                     buildingType2.Items.Add(item.Name);
                 }
-                
+
             }
-            else
+            if (buildingType.Text == TypeOfBuilding.multiFamillyBuilding)
             {
                 currentBuilding = multiFamilyBuildings;
 
@@ -80,14 +81,14 @@ namespace Cost_of_electricity_consumption
                 }
             }
 
+
         }
 
         private void HeatDemand_Click(object sender, EventArgs e)
         {
-            heatDemand[0] = currentBuilding[buildingType2.SelectedIndex].minValue * areaHome.Value;
-            heatDemand[1] = currentBuilding[buildingType2.SelectedIndex].maxValue * areaHome.Value;
 
-            string heatDemandText = "Zgodnie z obliczeniami: \r\nMinimalne zapotrzebowanie to: " + heatDemand[0] + "W/m2.\r\n A maksymalne to: " + heatDemand[1] + "W/m2";
+            string heatDemandText = "Zgodnie z obliczeniami: \r\nMinimalne zapotrzebowanie to: " + heatDemand[0] + "W/m2.\r\n" +
+                "Maksymalne zapotrzebowanie to: " + heatDemand[1] + "W/m2";
             heatDeamndLabelResult.Visible = true;
             heatDeamndLabelResult.Text = heatDemandText;
 
